@@ -10,7 +10,7 @@ Fixed::Fixed(int const n){
 }
 
 Fixed::Fixed(float const n) {
-	std::cout << "Floatconstructor called" << std::endl;
+	std::cout << "Float constructor called" << std::endl;
 	this->_fixedValue = (int)round(n * (1 << this->_fractionalBits));
 }
 
