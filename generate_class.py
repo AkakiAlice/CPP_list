@@ -9,6 +9,7 @@ public:
 	{class_name}(void);
 	{class_name}({class_name} const & src);
 	~{class_name}(void);
+
 	{class_name}&	operator=({class_name} const & rhs);
 
 private:
@@ -31,7 +32,6 @@ def generate_cpp_file(class_name):
 
 {class_name}::{class_name}({class_name} const & src) {{
 	*this = src;
-	return;
 }}
 
 {class_name}::~{class_name}(void) {{
