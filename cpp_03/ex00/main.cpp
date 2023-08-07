@@ -8,22 +8,25 @@ int	main(void) {
 	clapTrap2.setName("claptrap2");
 	std::cout << std::endl;
 
-	clapTrap1.setAttackDamage(1);
-	clapTrap2.setAttackDamage(1);
+	clapTrap1.setAttackDamage(5);
+	clapTrap2.setAttackDamage(10);
 	std::cout << std::endl;
 
 	clapTrap1.attack(clapTrap2.getName());
 	clapTrap2.takeDamage(clapTrap1.getAttackDamage());
-	clapTrap2.beRepaired(1);
+	clapTrap2.beRepaired(10);
 	std::cout << std::endl;
 
-	for (int i = 0; i < 9; i++) {
-		clapTrap1.attack(clapTrap2.getName());
-		clapTrap2.takeDamage(clapTrap1.getAttackDamage());
-		std::cout << std::endl;
-	}
+	clapTrap1.attack(clapTrap2.getName());
+	clapTrap2.takeDamage(clapTrap1.getAttackDamage());
+	std::cout << std::endl;
 
 	clapTrap1.attack(clapTrap2.getName());
+	clapTrap2.takeDamage(clapTrap1.getAttackDamage());
+	std::cout << std::endl;
+
+	clapTrap2.attack(clapTrap1.getName());
+	clapTrap1.takeDamage(clapTrap2.getAttackDamage());
 	std::cout << std::endl;
 
 	return(0);
