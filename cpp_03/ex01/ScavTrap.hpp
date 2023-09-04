@@ -15,8 +15,6 @@ public:
 	void	guardGate(void);
 
 private:
-	// Member variables
-
 };
 
 #endif
