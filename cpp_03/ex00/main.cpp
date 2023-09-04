@@ -2,10 +2,10 @@
 #include <iostream>
 
 int	main(void) {
-	ClapTrap	clapTrap1("claptrap1");
+	ClapTrap	clapTrap1("Rogerinho");
 	ClapTrap	clapTrap2;
 
-	clapTrap2.setName("claptrap2");
+	clapTrap2.setName("Maurilio");
 	std::cout << std::endl;
 
 	clapTrap1.setAttackDamage(5);
