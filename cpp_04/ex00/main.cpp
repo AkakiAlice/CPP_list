@@ -6,48 +6,32 @@
 
 int main(void) {
 	{
-		const Animal* animal = new Animal();
-		const Animal* dog = new Dog();
-		const Animal* cat = new Cat();
+		const Animal* animals[] = {new Animal(), new Dog(), new Cat()};
+		const int arraySize = (int)(sizeof(animals)/sizeof(animals[0]));
 		std::cout << std::endl;
 
-		std::cout << "Type: " << animal->getType() << std::endl;
-		std::cout << "Sound: ";
-		animal->makeSound();
-		std::cout << std::endl;
-
-		std::cout << "Type: " << dog->getType() << std::endl;
-		std::cout << "Sound: ";
-		dog->makeSound();
-		std::cout << std::endl;
-
-		std::cout << "Type: " << cat->getType() << std::endl;
-		std::cout << "Sound: ";
-		cat->makeSound();
-		std::cout << std::endl;
-
-		delete cat;
-		delete dog;
-		delete animal;
+		for (int i = 0; i < arraySize; ++i) {
+			std::cout << "Type: " << animals[i]->getType() << std::endl;
+			std::cout << "Sound: ";
+			animals[i]->makeSound();
+			delete animals[i];
+			std::cout << std::endl;
+		}
 		std::cout << std::endl;
 	}
 	{
-		const WrongAnimal* wrongAnimal = new WrongAnimal();
-		const WrongAnimal* wrongCat = new WrongCat();
+		const WrongAnimal* wrong[] = {new WrongAnimal(), new WrongCat()};
+		const int arraySize = (int)(sizeof(wrong)/sizeof(wrong[0]));
 		std::cout << std::endl;
 
-		std::cout << "Type: " << wrongAnimal->getType() << std::endl;
-		std::cout << "Sound: ";
-		wrongAnimal->makeSound();
-		std::cout << std::endl;
-
-		std::cout << "Type: " << wrongCat->getType() << std::endl;
-		std::cout << "Sound: ";
-		wrongCat->makeSound();
-		std::cout << std::endl;
-
-		delete wrongAnimal;
-		delete wrongCat;
+		for (int i = 0; i < arraySize; ++i) {
+			std::cout << "Type: " << wrong[i]->getType() << std::endl;
+			std::cout << "Sound: ";
+			wrong[i]->makeSound();
+			delete wrong[i];
+			std::cout << std::endl;
+		}
 	}
 	return 0;
 }
+
