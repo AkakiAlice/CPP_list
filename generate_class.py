@@ -4,6 +4,8 @@ def generate_header_file(class_name):
 	header_content = f'''#ifndef {class_name.upper()}_HPP
 #define {class_name.upper()}_HPP
 
+#include <iostream>
+
 class {class_name} {{
 public:
 	{class_name}(void);
@@ -27,20 +29,21 @@ def generate_cpp_file(class_name):
 	cpp_content = f'''#include "{class_name}.hpp"
 
 {class_name}::{class_name}(void) {{
-	return;
+	std::cout << "{class_name} default constructor called" << std::endl;
 }}
 
 {class_name}::{class_name}({class_name} const & src) {{
 	*this = src;
+	std::cout << "{class_name} copy constructor called" << std::endl;
 }}
 
 {class_name}::~{class_name}(void) {{
-	return;
+	std::cout << "{class_name} destructor called" << std::endl;
 }}
 
 {class_name}&	{class_name}::operator=({class_name} const & rhs) {{
-	if (this == &rhs) {{
-		return *this;
+	if (this != &rhs) {{
+		//assign
 	}}
 	return *this;
 }}
