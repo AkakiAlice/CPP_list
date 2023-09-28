@@ -9,7 +9,7 @@ void	validBureaucratTest(void) {
 		Bureaucrat	a("Renan", 150);
 		std::cout << a << std::endl;
 	} catch (std::exception & e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 }
 
@@ -19,7 +19,7 @@ void	higherThanMaxTest(void) {
 		Bureaucrat	a("Maurilio", 0);
 		std::cout << a << std::endl;
 	} catch (std::exception & e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 }
 
@@ -29,7 +29,7 @@ void	lowerThanMinTest(void) {
 		Bureaucrat	a("Rogerinho", 151);
 		std::cout << a << std::endl;
 	} catch (std::exception & e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 }
 
@@ -54,7 +54,7 @@ void	incrementLoopTest(void) {
 		}
 
 	} catch (std::exception & e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 }
 
@@ -70,7 +70,7 @@ void	decrementLoopTest(void) {
 		}
 
 	} catch (std::exception & e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 }
 

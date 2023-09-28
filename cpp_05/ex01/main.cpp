@@ -36,7 +36,7 @@ void	lowerFormTest(void) {
 		Form	a("invalidForm", 1, 151);
 		std::cout << a << std::endl;
 	} catch (std::exception & e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 
 }
@@ -47,7 +47,7 @@ void	higherFormTest(void) {
 		Form	a("invalidForm", 0, 150);
 		std::cout << a << std::endl;
 	} catch (std::exception & e) {
-		std::cerr << "Exception caught: " << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 
 }
