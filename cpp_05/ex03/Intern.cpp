@@ -36,12 +36,12 @@ AForm*	Intern::_makePresidential(std::string const & formTarget) {
 
 AForm*	Intern::makeForm(std::string const & formName, std::string const & formTarget) {
 	std::string	formNames[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
-	AForm *(Intern::*functionPtr[3])(std::string const &) = { &Intern::_makeShrubbery, &Intern::_makeRobotomy, &Intern::_makePresidential};
+	AForm *(Intern::*forms[3])(std::string const &) = { &Intern::_makeShrubbery, &Intern::_makeRobotomy, &Intern::_makePresidential};
 
 	for (int i = 0; i < 3; i++) {
 		if (formName == formNames[i]) {
 			std::cout << "Intern creates " << formName << " form" <<  std::endl;
-			return (this->*functionPtr[i])(formTarget);
+			return (this->*forms[i])(formTarget);
 		}
 	}
 	throw InvalidFormException();
