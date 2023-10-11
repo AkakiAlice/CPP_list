@@ -5,9 +5,7 @@
 #include <cctype>
 #include <iomanip>
 #include <cstdlib>
-
-#define MAX_INT 2147483647
-#define MIN_INT -2147483648
+#include <climits>
 
 class ScalarConverter {
 public:
@@ -31,6 +29,7 @@ private:
 	static void	_convertDouble(std::string const & literal);
 
 	static void	_printTypes(void);
+	static void	_printChar(void);
 	static void	_printInt(void);
 
 	static int	_countDecimalPoint(void);

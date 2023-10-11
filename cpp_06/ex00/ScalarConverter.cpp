@@ -50,7 +50,7 @@ bool	ScalarConverter::_isInt(void) {
 		else if (!std::isdigit(_inputValue[i]))
 			return false;
 	}
-	if (atol(_inputValue.c_str()) > MAX_INT || atol(_inputValue.c_str()) < MIN_INT)
+	if (atol(_inputValue.c_str()) > INT_MAX || atol(_inputValue.c_str()) < INT_MIN)
 		return false;
 	return true;
 }
@@ -113,7 +113,7 @@ void	ScalarConverter::_convertDouble(std::string const & literal) {
 }
 
 void	ScalarConverter::_printTypes(void) {
-	std::cout << "char: " << _charValue << std::endl;
+	_printChar();
 	_printInt();
 	std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << _floatValue << "f" << std::endl;
@@ -121,9 +121,18 @@ void	ScalarConverter::_printTypes(void) {
 	std::cout << "double: " << _doubleValue << std::endl;
 }
 
+void	ScalarConverter::_printChar(void) {
+	if (_rangeCheck > CHAR_MAX || _rangeCheck < CHAR_MIN)
+		std::cout << "char: Impossible" << std::endl;
+	else if (isprint(_charValue))
+		std::cout << "char: '" << _charValue << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+}
+
 void	ScalarConverter::_printInt(void) {
-	if (_rangeCheck > MAX_INT || _rangeCheck < MIN_INT)
-		std::cout << "int: impossible" << std::endl;
+	if (_rangeCheck > INT_MAX || _rangeCheck < INT_MIN)
+		std::cout << "int: Impossible" << std::endl;
 	else
 		std::cout << "int: " << _intValue << std::endl;
 }
