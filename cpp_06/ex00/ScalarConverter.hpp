@@ -6,6 +6,14 @@
 #include <iomanip>
 #include <cstdlib>
 #include <climits>
+#include <cfloat>
+
+#define CHAR 1
+#define INT 2
+#define FLOAT 3
+#define DOUBLE 4
+#define PSEUDO_FLT 5
+#define PSEUDO_DBL 6
 
 class ScalarConverter {
 public:
@@ -18,19 +26,24 @@ private:
 
 	ScalarConverter&	operator=(ScalarConverter const & rhs);
 
-	static bool	_isChar(void);
-	static bool	_isInt(void);
-	static bool	_isFloat(void);
-	static bool	_isDouble(void);
+	static void	_findType(void);
+	static void	_isChar(void);
+	static void	_isInt(void);
+	static void	_isFloat(void);
+	static void	_isDouble(void);
+	static void	_isPseudo(void);
 
-	static void	_convertChar(std::string const & lieteral);
-	static void	_convertInt(std::string const & literal);
-	static void	_convertFloat(std::string const & literal);
-	static void	_convertDouble(std::string const & literal);
+	static void	_convertTypes(void);
+	static void	_convertChar(void);
+	static void	_convertInt(void);
+	static void	_convertFloat(void);
+	static void	_convertDouble(void);
 
 	static void	_printTypes(void);
 	static void	_printChar(void);
 	static void	_printInt(void);
+	static void	_printFloat(void);
+	static void	_printDouble(void);
 
 	static int	_countDecimalPoint(void);
 	static bool	_isDecimalNumberFloat(void);
@@ -41,7 +54,8 @@ private:
 	static int			_intValue;
 	static float		_floatValue;
 	static double		_doubleValue;
-	static double		_rangeCheck;
+	static double		_rangeChecker;
+	static int			_type;
 };
 
 #endif
