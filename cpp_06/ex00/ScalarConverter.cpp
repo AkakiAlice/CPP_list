@@ -1,12 +1,12 @@
 #include "ScalarConverter.hpp"
 
-	std::string	ScalarConverter::_inputValue = "";
-	char		ScalarConverter::_charValue = 0;
-	int			ScalarConverter::_intValue = 0;
-	float		ScalarConverter::_floatValue = 0;
-	double		ScalarConverter::_doubleValue = 0;
-	double		ScalarConverter::_rangeChecker = 0;
-	int			ScalarConverter::_type = 0;
+std::string	ScalarConverter::_inputValue = "";
+char		ScalarConverter::_charValue = 0;
+int			ScalarConverter::_intValue = 0;
+float		ScalarConverter::_floatValue = 0;
+double		ScalarConverter::_doubleValue = 0;
+double		ScalarConverter::_rangeChecker = 0;
+int			ScalarConverter::_type = 0;
 
 ScalarConverter::ScalarConverter(void) {}
 
