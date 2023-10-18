@@ -37,7 +37,7 @@ int	Span::shortestSpan(void) {
 	std::sort(_vector.begin(), _vector.end());
 
 	int shortestSpan = std::numeric_limits<int>::max();
-	for (size_t i = 2; i < _vector.size(); i++) {
+	for (size_t i = 1; i < _vector.size(); i++) {
 			if (_vector[i] - _vector[i - 1] < shortestSpan)
 				shortestSpan = _vector[i] - _vector[i - 1];
 	}
