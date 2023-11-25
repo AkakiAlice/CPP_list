@@ -18,6 +18,7 @@ private:
 	PmergeMe&	operator=(PmergeMe const & rhs);
 
 	static void	merge(std::vector<int> & sequence, int rangeSize);
+	//static void	insertionTeste(std::vector<int> & sequence, int rangeSize);
 
 	static std::vector<int>	_sequence;
 };
