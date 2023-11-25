@@ -26,26 +26,6 @@ void	checkArg(int argc, char * argv) {
 	checkInput(argv);
 }
 
-// int	jacobsthal(int n) {
-// 	if (n == 0) return 0;
-// 	if (n == 1) return 1;
-// 	std::cout << "[" << n << "]" << '\n';
-// 	return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
-// }
-
-// void	jacobsthalNumbers() {
-// 	int	n = 0;
-
-// 	while (1) {
-// 		int result = jacobsthal(n);
-// 		if (result > 171)
-// 			break;
-// 		std::cout << result << " ";
-// 		n++;
-// 	}
-// 	std::cout << '\n';
-// }
-
 void	parseInput(std::string input, std::vector<int> & numbers) {
 	std::istringstream	iss(input);
 	int	num;

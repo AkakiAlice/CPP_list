@@ -1,7 +1,5 @@
 #include "PmergeMe.hpp"
 
-std::vector<int>	PmergeMe::_sequence;
-
 PmergeMe::PmergeMe(void) {}
 
 PmergeMe::PmergeMe(PmergeMe const & src) {
@@ -22,18 +20,9 @@ void	printRange(std::vector<int>::iterator first, std::vector<int>::iterator las
 	std::cout << std::endl;
 }
 
-// void	printRangeInfo(std::vector<int>::iterator first, std::vector<int>::iterator last, std::string rangeName) {
-// 	std::cout << "range " << rangeName << "\n";
-// 	std::cout << "first:      [" << *first << "]\n";
-// 	std::cout << "last:       [" << *last << "]\n";
-// 	std::cout << "range size: [" << std::distance(first, last) << "]\n";
-// 	std::cout << "range:      ";
-// 	printRange(first, last);
-// }
-
 void	printVector(std::vector<int> vector) {
-	std::vector<int>::iterator first = vector.begin();
-	std::vector<int>::iterator last = vector.end();
+	std::vector<int>::iterator	first = vector.begin();
+	std::vector<int>::iterator	last = vector.end();
 	printRange(first, last);
 }
 
@@ -43,7 +32,7 @@ int	jacobsthal(int n) {
 }
 
 void	getInsertionSequence(size_t pendSize, std::vector<int> & insertionSequence) {
-	int	n = 0;
+	int		n = 0;
 	size_t	result;
 	size_t	prevResult;
 	size_t	aux;
@@ -77,7 +66,7 @@ bool is_sorted(std::vector<int>::iterator first, std::vector<int>::iterator last
 	if (first == last)
 		return true;
 
-	std::vector<int>::iterator next = first;
+	std::vector<int>::iterator	next = first;
 	while (++next != last) {
 		if (*next < *first)
 			return false;
@@ -94,63 +83,55 @@ void	PmergeMe::sort(std::vector<int> input) {
 }
 
 int binarySearch(const std::vector<int>& vector, int value) {
-	int first = 0;
-	int last = vector.size() - 1;
+	int	first = 0;
+	int	last = vector.size() - 1;
 
 	while (first <= last) {
-		int middle = (first + last) / 2;
+		int	middle = (first + last) / 2;
 
-		if (vector[middle] == value) {
+		if (vector[middle] == value)
 			return middle;
-		} else if (vector[middle] < value) {
+		else if (vector[middle] < value)
 			first = middle + 1;
-		} else {
+		else
 			last = middle - 1;
-		}
 	}
 
 	return first;
 }
 
+void	goToNextRange(std::vector<int>::iterator & first, std::vector<int>::iterator & last, int rangeSize) {
+	first = last;
+	last = first + rangeSize;
+}
+
 void	getSearchVector(std::vector<int> & chain, std::vector<int> & sorted, int pos, std::vector<int> & searchVector, int rangeSize) {
-	std::vector<int>::iterator firstChain = chain.begin();
-	std::vector<int>::iterator	lastChain = firstChain + rangeSize;
-
-	std::vector<int>::iterator firstDelimiter;
-	std::vector<int>::iterator	lastDelimiter;
-
-	std::vector<int>::iterator firstSorted = sorted.begin();
+	std::vector<int>::iterator	firstSorted = sorted.begin();
 	std::vector<int>::iterator	lastSorted = firstSorted + rangeSize;
 
-	size_t teste = pos;
-
-	if (teste >= (chain.size() / rangeSize)) {
-		while (lastSorted != sorted.end()) {
-			searchVector.push_back(*(lastSorted-1));
-			firstSorted = lastSorted;
-			lastSorted = firstSorted + rangeSize;
+	if (pos >= static_cast<int>(chain.size() / rangeSize)) {
+		while (firstSorted != sorted.end()) {
+			searchVector.push_back(*(std::max_element(firstSorted, lastSorted)));
+			goToNextRange(firstSorted, lastSorted, rangeSize);
 		}
-		searchVector.push_back(*(lastSorted - 1));
 		return ;
 	}
 
+	std::vector<int>::iterator	firstChain = chain.begin();
+	std::vector<int>::iterator	lastChain = firstChain + rangeSize;
 
-	firstDelimiter = firstChain;
-	lastDelimiter = lastChain;
+	std::vector<int>::iterator	firstDelimiter = firstChain;
+	std::vector<int>::iterator	lastDelimiter = lastChain;
+
 	for (int i = 0; i < pos; i++) {
 		firstDelimiter = firstChain;
 		lastDelimiter = lastChain;
-
-		firstChain = lastChain;
-		lastChain = firstChain + rangeSize;
+		goToNextRange(firstChain, lastChain, rangeSize);
 	}
 
 	while (*lastSorted != *lastDelimiter) {
-		if (*lastSorted == *lastDelimiter)
-			break;
-		searchVector.push_back(*(lastSorted-1));
-		firstSorted = lastSorted;
-		lastSorted = firstSorted + rangeSize;
+		searchVector.push_back(*(std::max_element(firstSorted, lastSorted)));
+		goToNextRange(firstSorted, lastSorted, rangeSize);
 	}
 }
 
