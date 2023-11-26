@@ -146,8 +146,7 @@ int	getRangeMaxValue (std::vector<int> & vector, int pos, int rangeSize) {
 void insertionSort(std::vector<int>& chain, std::vector<int>& pend, std::vector<int>& sorted, int rangeSize) {
 
 	sorted = chain;
-	std::vector<int> insertionSequence;
-
+	std::vector<int>			insertionSequence;
 	std::vector<int>::iterator	firstPend = pend.begin();
 	std::vector<int>::iterator	lastPend = firstPend + rangeSize;
 	std::vector<int>::iterator	it;
@@ -155,27 +154,20 @@ void insertionSort(std::vector<int>& chain, std::vector<int>& pend, std::vector<
 
 	getInsertionSequence(pend.size() / rangeSize, insertionSequence);
 
-	int i = 0;
-
-	int	j = pend.size() / (rangeSize);
-	int k = 0;
-
-	while (firstPend != pend.end()) {
-		if (k == j)
-			break;
-		if (firstPend == pend.begin()) {
+	int	i = 0;
+	int	pendSize = pend.size() / (rangeSize);
+	int	pos;
+	while (i != pendSize) {
+		if (firstPend == pend.begin())
 			sorted.insert(sorted.begin(), firstPend, lastPend);
-		}
 		else {
-			std::vector<int> searchVector;
+			std::vector<int>	searchVector;
 			getSearchVector(chain, sorted, insertionSequence[i], searchVector, rangeSize);
-			int pos = binarySearch(searchVector, getRangeMaxValue(pend, insertionSequence[i], rangeSize));
+			pos = binarySearch(searchVector, getRangeMaxValue(pend, insertionSequence[i], rangeSize));
 			findRangeByPosition(it, ite, pend, insertionSequence[i], rangeSize);
 			sorted.insert(sorted.begin() + (pos * rangeSize), it, ite);
 		}
-		firstPend = lastPend;
-		lastPend = firstPend + rangeSize;
-		k++;
+		goToNextRange(firstPend, lastPend, rangeSize);
 		i++;
 	}
 	while (firstPend != pend.end()) {
