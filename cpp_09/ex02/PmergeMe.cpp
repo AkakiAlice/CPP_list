@@ -75,13 +75,6 @@ bool is_sorted(std::vector<int>::iterator first, std::vector<int>::iterator last
 	return true;
 }
 
-void	PmergeMe::sort(std::vector<int> input) {
-	mergeInsertionSort(input, 1);
-	printVector(input);
-	if (is_sorted(input.begin(), input.end()))
-		std::cout << "Is sorted\n";
-}
-
 int binarySearch(const std::vector<int>& vector, int value) {
 	int	first = 0;
 	int	last = vector.size() - 1;
@@ -234,7 +227,7 @@ void	comparePairs(std::vector<int> & sequence, int rangeSize) {
 	}
 }
 
-void	PmergeMe::mergeInsertionSort(std::vector<int> & sequence, int rangeSize) {
+void	mergeInsertionSort(std::vector<int> & sequence, int rangeSize) {
 	if (rangeSize >= static_cast<int>(sequence.size()))
 		return ;
 
@@ -247,4 +240,11 @@ void	PmergeMe::mergeInsertionSort(std::vector<int> & sequence, int rangeSize) {
 	fillPendAndChain(pend, chain, sequence, rangeSize);
 	insertionSort(chain, pend, sorted, rangeSize);
 	sequence.assign(sorted.begin(), sorted.end());
+}
+
+void	PmergeMe::sort(std::vector<int> input) {
+	mergeInsertionSort(input, 1);
+	printVector(input);
+	if (is_sorted(input.begin(), input.end()))
+		std::cout << "Is sorted\n";
 }

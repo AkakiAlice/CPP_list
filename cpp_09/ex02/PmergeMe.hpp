@@ -16,8 +16,6 @@ private:
 	~PmergeMe(void);
 
 	PmergeMe&	operator=(PmergeMe const & rhs);
-
-	static void	merge(std::vector<int> & sequence, int rangeSize);
 };
 
 #endif
