@@ -143,7 +143,7 @@ int	getRangeMaxValue (std::vector<int> & vector, int pos, int rangeSize) {
 	return *(std::max_element(first, last));
 }
 
-void insertionSort(std::vector<int>& chain, std::vector<int>& pend, std::vector<int>& sorted, int rangeSize) {
+void insertionSort(std::vector<int> & chain, std::vector<int> & pend, std::vector<int> & sorted, int rangeSize) {
 
 	sorted = chain;
 	std::vector<int>			insertionSequence;
