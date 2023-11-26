@@ -177,11 +177,10 @@ void insertionSort(std::vector<int> & chain, std::vector<int> & pend, std::vecto
 }
 
 void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
-
 	if (rangeSize >= static_cast<int>(sequence.size()))
 		return ;
 
-	size_t	j = sequence.size() / (rangeSize * 2);
+	size_t	sequenceSize = sequence.size() / (rangeSize * 2);
 
 	std::vector<int>::iterator	firstRange1 = sequence.begin();
 	std::vector<int>::iterator	lastRange1 = firstRange1 + rangeSize;
@@ -189,16 +188,14 @@ void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
 	std::vector<int>::iterator	firstRange2 = lastRange1;
 	std::vector<int>::iterator	lastRange2 = firstRange2 + rangeSize;
 
-	int		maxRange1;
-	int		maxRange2;
+	int		maxValueRange1;
+	int		maxValueRange2;
 	size_t	i = 0;
 
-	while (firstRange1 != sequence.end()) {
-		if (i == j)
-			break;
-		maxRange1 = *std::max_element(firstRange1, lastRange1);
-		maxRange2 = *std::max_element(firstRange2, lastRange2);
-		if (maxRange1 > maxRange2)
+	while (i != sequenceSize) {
+		maxValueRange1 = *std::max_element(firstRange1, lastRange1);
+		maxValueRange2 = *std::max_element(firstRange2, lastRange2);
+		if (maxValueRange1 > maxValueRange2)
 			std::swap_ranges(firstRange1, lastRange1, firstRange2);
 
 		firstRange1 = lastRange2;
@@ -212,14 +209,11 @@ void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
 
 	merge(sequence, rangeSize * 2);
 
-
-	std::vector<int>	insertionSequence;
 	std::vector<int>	pend;
 	std::vector<int>	chain;
 
-
-	j = sequence.size() / (rangeSize * 2);
-	if (j == 0)
+	sequenceSize = sequence.size() / (rangeSize * 2);
+	if (sequenceSize == 0)
 		return;
 
 	firstRange1 = sequence.begin();
@@ -231,15 +225,15 @@ void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
 	i = 0;
 
 	while (firstRange1 != sequence.end()) {
-		if (i == j) {
+		if (i == sequenceSize) {
 			while (firstRange1 != sequence.end()) {
 				pend.push_back(*firstRange1);
 				firstRange1++;
 			}
 			break;
 		}
-		maxRange1 = *std::max_element(firstRange1, lastRange1);
-		maxRange2 = *std::max_element(firstRange2, lastRange2);
+		maxValueRange1 = *std::max_element(firstRange1, lastRange1);
+		maxValueRange2 = *std::max_element(firstRange2, lastRange2);
 		pend.insert(pend.end(), firstRange1, lastRange1);
 		chain.insert(chain.end(), firstRange2, lastRange2);
 
@@ -249,7 +243,6 @@ void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
 		firstRange2 = lastRange1;
 		lastRange2 = firstRange2 + rangeSize;
 		i++;
-
 	}
 	std::vector<int> sorted;
 	insertionSort(chain, pend, sorted, rangeSize);
