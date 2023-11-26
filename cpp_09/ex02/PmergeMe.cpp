@@ -76,7 +76,7 @@ bool is_sorted(std::vector<int>::iterator first, std::vector<int>::iterator last
 }
 
 void	PmergeMe::sort(std::vector<int> input) {
-	merge(input, 1);
+	mergeInsertionSort(input, 1);
 	printVector(input);
 	if (is_sorted(input.begin(), input.end()))
 		std::cout << "Is sorted\n";
@@ -234,12 +234,12 @@ void	comparePairs(std::vector<int> & sequence, int rangeSize) {
 	}
 }
 
-void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
+void	PmergeMe::mergeInsertionSort(std::vector<int> & sequence, int rangeSize) {
 	if (rangeSize >= static_cast<int>(sequence.size()))
 		return ;
 
 	comparePairs(sequence, rangeSize);
-	merge(sequence, rangeSize * 2);
+	mergeInsertionSort(sequence, rangeSize * 2);
 
 	std::vector<int>	pend;
 	std::vector<int>	chain;
