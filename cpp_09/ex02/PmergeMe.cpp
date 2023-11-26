@@ -176,6 +176,36 @@ void insertionSort(std::vector<int> & chain, std::vector<int> & pend, std::vecto
 	}
 }
 
+void	fillPendAndChain(std::vector<int> & pend, std::vector<int> & chain, std::vector<int> & sequence, int rangeSize) {
+	int	sequenceSize = sequence.size() / (rangeSize * 2);
+	int	i = 0;
+
+	std::vector<int>::iterator	firstRange1 = sequence.begin();
+	std::vector<int>::iterator	lastRange1 = firstRange1 + rangeSize;
+
+	std::vector<int>::iterator	firstRange2 = lastRange1;
+	std::vector<int>::iterator	lastRange2 = firstRange2 + rangeSize;
+
+	while (firstRange1 != sequence.end()) {
+		if (i == sequenceSize) {
+			while (firstRange1 != sequence.end()) {
+				pend.push_back(*firstRange1);
+				firstRange1++;
+			}
+			break;
+		}
+		pend.insert(pend.end(), firstRange1, lastRange1);
+		chain.insert(chain.end(), firstRange2, lastRange2);
+
+		firstRange1 = lastRange2;
+		lastRange1 = firstRange1 + rangeSize;
+
+		firstRange2 = lastRange1;
+		lastRange2 = firstRange2 + rangeSize;
+		i++;
+	}
+}
+
 void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
 	if (rangeSize >= static_cast<int>(sequence.size()))
 		return ;
@@ -212,39 +242,9 @@ void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
 	std::vector<int>	pend;
 	std::vector<int>	chain;
 
-	sequenceSize = sequence.size() / (rangeSize * 2);
-	if (sequenceSize == 0)
-		return;
+	fillPendAndChain(pend, chain, sequence, rangeSize);
 
-	firstRange1 = sequence.begin();
-	lastRange1 = firstRange1 + rangeSize;
-
-	firstRange2 = lastRange1;
-	lastRange2 = firstRange2 + rangeSize;
-
-	i = 0;
-
-	while (firstRange1 != sequence.end()) {
-		if (i == sequenceSize) {
-			while (firstRange1 != sequence.end()) {
-				pend.push_back(*firstRange1);
-				firstRange1++;
-			}
-			break;
-		}
-		maxValueRange1 = *std::max_element(firstRange1, lastRange1);
-		maxValueRange2 = *std::max_element(firstRange2, lastRange2);
-		pend.insert(pend.end(), firstRange1, lastRange1);
-		chain.insert(chain.end(), firstRange2, lastRange2);
-
-		firstRange1 = lastRange2;
-		lastRange1 = firstRange1 + rangeSize;
-
-		firstRange2 = lastRange1;
-		lastRange2 = firstRange2 + rangeSize;
-		i++;
-	}
-	std::vector<int> sorted;
+	std::vector<int>	sorted;
 	insertionSort(chain, pend, sorted, rangeSize);
 	sequence.assign(sorted.begin(), sorted.end());
 }
