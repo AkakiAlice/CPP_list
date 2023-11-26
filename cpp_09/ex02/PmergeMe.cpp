@@ -206,21 +206,17 @@ void	fillPendAndChain(std::vector<int> & pend, std::vector<int> & chain, std::ve
 	}
 }
 
-void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
-	if (rangeSize >= static_cast<int>(sequence.size()))
-		return ;
-
-	size_t	sequenceSize = sequence.size() / (rangeSize * 2);
+void	comparePairs(std::vector<int> & sequence, int rangeSize) {
+	int	sequenceSize = sequence.size() / (rangeSize * 2);
+	int	i = 0;
+	int	maxValueRange1;
+	int	maxValueRange2;
 
 	std::vector<int>::iterator	firstRange1 = sequence.begin();
 	std::vector<int>::iterator	lastRange1 = firstRange1 + rangeSize;
 
 	std::vector<int>::iterator	firstRange2 = lastRange1;
 	std::vector<int>::iterator	lastRange2 = firstRange2 + rangeSize;
-
-	int		maxValueRange1;
-	int		maxValueRange2;
-	size_t	i = 0;
 
 	while (i != sequenceSize) {
 		maxValueRange1 = *std::max_element(firstRange1, lastRange1);
@@ -236,15 +232,19 @@ void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
 		i++;
 
 	}
+}
 
+void	PmergeMe::merge(std::vector<int> & sequence, int rangeSize) {
+	if (rangeSize >= static_cast<int>(sequence.size()))
+		return ;
+
+	comparePairs(sequence, rangeSize);
 	merge(sequence, rangeSize * 2);
 
 	std::vector<int>	pend;
 	std::vector<int>	chain;
-
-	fillPendAndChain(pend, chain, sequence, rangeSize);
-
 	std::vector<int>	sorted;
+	fillPendAndChain(pend, chain, sequence, rangeSize);
 	insertionSort(chain, pend, sorted, rangeSize);
 	sequence.assign(sorted.begin(), sorted.end());
 }
