@@ -120,16 +120,10 @@ void	getSearchVector(std::vector<int> & chain, std::vector<int> & sorted, int po
 	std::vector<int>::iterator	firstChain = chain.begin();
 	std::vector<int>::iterator	lastChain = firstChain + rangeSize;
 
-	std::vector<int>::iterator	firstDelimiter = firstChain;
-	std::vector<int>::iterator	lastDelimiter = lastChain;
-
-	for (int i = 0; i < pos; i++) {
-		firstDelimiter = firstChain;
-		lastDelimiter = lastChain;
+	for (int i = 1; i < pos; i++)
 		goToNextRange(firstChain, lastChain, rangeSize);
-	}
 
-	while (*lastSorted != *lastDelimiter) {
+	while (*lastSorted != *lastChain) {
 		searchVector.push_back(*(std::max_element(firstSorted, lastSorted)));
 		goToNextRange(firstSorted, lastSorted, rangeSize);
 	}
