@@ -105,6 +105,15 @@ void	goToNextRange(std::vector<int>::iterator & first, std::vector<int>::iterato
 	last = first + rangeSize;
 }
 
+void	findRangeByPosition (std::vector<int>::iterator & first, std::vector<int>::iterator & last, std::vector<int> & vector, int pos, int rangeSize) {
+	std::vector<int>::iterator	it = vector.begin();
+	std::vector<int>::iterator	itE = it + rangeSize;
+	for (int i = 1; i < pos; i++)
+		goToNextRange(it, itE, rangeSize);
+	first = it;
+	last = itE;
+}
+
 void	getSearchVector(std::vector<int> & chain, std::vector<int> & sorted, int pos, std::vector<int> & searchVector, int rangeSize) {
 	std::vector<int>::iterator	firstSorted = sorted.begin();
 	std::vector<int>::iterator	lastSorted = firstSorted + rangeSize;
@@ -117,39 +126,22 @@ void	getSearchVector(std::vector<int> & chain, std::vector<int> & sorted, int po
 		return ;
 	}
 
-	std::vector<int>::iterator	firstChain = chain.begin();
-	std::vector<int>::iterator	lastChain = firstChain + rangeSize;
+	std::vector<int>::iterator	firstChain;
+	std::vector<int>::iterator	lastChain;
+	findRangeByPosition(firstChain, lastChain, chain, pos, rangeSize);
 
-	for (int i = 1; i < pos; i++)
-		goToNextRange(firstChain, lastChain, rangeSize);
-
-	while (*lastSorted != *lastChain) {
+	while (*firstSorted != *firstChain) {
 		searchVector.push_back(*(std::max_element(firstSorted, lastSorted)));
 		goToNextRange(firstSorted, lastSorted, rangeSize);
 	}
 }
 
-int	getRangeMaxValue (std::vector<int> & pend, int pos, int rangeSize) {
-	std::vector<int>::iterator firstPend = pend.begin();
-	std::vector<int>::iterator	lastPend = firstPend + rangeSize;
-	for (int i = 1; i < pos; i++) {
-		firstPend = lastPend;
-		lastPend = firstPend + rangeSize;
-	}
-	return *(lastPend - 1);
+int	getRangeMaxValue (std::vector<int> & vector, int pos, int rangeSize) {
+	std::vector<int>::iterator	first;
+	std::vector<int>::iterator	last;
+	findRangeByPosition(first, last, vector, pos, rangeSize);
+	return *(std::max_element(first, last));
 }
-
-void	findRange (std::vector<int>::iterator & it, std::vector<int>::iterator & ite, std::vector<int> & pend, int pos, int rangeSize) {
-	std::vector<int>::iterator firstPend = pend.begin();
-	std::vector<int>::iterator	lastPend = firstPend + rangeSize;
-	for (int i = 1; i < pos; i++) {
-		firstPend = lastPend;
-		lastPend = firstPend + rangeSize;
-	}
-	it = firstPend;
-	ite = lastPend;
-}
-
 
 void insertionSort(std::vector<int>& chain, std::vector<int>& pend, std::vector<int>& sorted, int rangeSize) {
 
@@ -178,7 +170,7 @@ void insertionSort(std::vector<int>& chain, std::vector<int>& pend, std::vector<
 			std::vector<int> searchVector;
 			getSearchVector(chain, sorted, insertionSequence[i], searchVector, rangeSize);
 			int pos = binarySearch(searchVector, getRangeMaxValue(pend, insertionSequence[i], rangeSize));
-			findRange(it, ite, pend, insertionSequence[i], rangeSize);
+			findRangeByPosition(it, ite, pend, insertionSequence[i], rangeSize);
 			sorted.insert(sorted.begin() + (pos * rangeSize), it, ite);
 		}
 		firstPend = lastPend;
