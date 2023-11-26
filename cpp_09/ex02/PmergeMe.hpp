@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 #include <iterator>
 #include <algorithm>
 
 class PmergeMe {
 public:
-	static void	sort(std::vector<int> input);
+	static void	sort(std::vector<int> & input);
+	static void	sort(std::deque<int> & input);
 
 private:
 	PmergeMe(void);
